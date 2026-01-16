@@ -1,4 +1,4 @@
-import { addToCart } from './cart.js';
+import { addToCart, getPurchases } from './cart.js';
 
 const productsContainer=document.getElementById('productsContainer');
 const loader=document.getElementById('loader');
@@ -71,4 +71,51 @@ export function renderProducts(products){
     card.querySelector('button').onclick=()=>addToCart(p);
     productsContainer.appendChild(card);
   });
+}
+
+export function initReports(){
+  const reportBtn=document.getElementById('reportButton');
+  const reportModal=document.getElementById('reportModal');
+  const closeReportBtn=document.getElementById('closeReport');
+
+  reportBtn.onclick=()=>{
+    showReportModal();
+    reportModal.classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+  };
+
+  closeReportBtn.onclick=()=>{
+    reportModal.classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+  };
+
+  document.getElementById('overlay').onclick=()=>{
+    reportModal.classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+  };
+}
+
+function showReportModal(){
+  const purchases=getPurchases();
+  const reportContent=document.getElementById('reportContent');
+  
+  if(purchases.length===0){
+    reportContent.innerHTML='<p style="text-align:center;padding:2rem;">No hay compras registradas</p>';
+    return;
+  }
+
+  let html='<div class="report-list">';
+  purchases.forEach((p,i)=>{
+    html+=`
+      <div class="report-item">
+        <span class="report-rank">#${i+1}</span>
+        <div class="report-details">
+          <p class="report-title">${p.title}</p>
+          <p class="report-stats">Cantidad comprada: <strong>${p.qty}</strong> unidades</p>
+        </div>
+      </div>
+    `;
+  });
+  html+='</div>';
+  reportContent.innerHTML=html;
 }

@@ -10,7 +10,12 @@ body{background-color:whitesmoke}
   align-items:center;
 }
 
-#cartButton{
+.header-buttons{
+  display:flex;
+  gap:.5rem;
+}
+
+#reportButton, #cartButton{
   font-size:1.4rem;
   background:none;
   border:none;
@@ -98,4 +103,72 @@ body.cart-open #overlay{display:block}
   grid-template-columns:1fr auto auto;
   gap:.5rem;
   margin-bottom:.5rem;
+}
+.modal{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1600;
+  display:none;
+}
+
+.modal.active{display:flex}
+
+.modal-content{
+  background:white;
+  padding:2rem;
+  border-radius:10px;
+  max-width:600px;
+  max-height:80vh;
+  overflow-y:auto;
+  position:relative;
+  width:90%;
+}
+
+.modal-close{
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  background:none;
+  border:none;
+  font-size:1.5rem;
+  cursor:pointer;
+}
+
+.report-list{
+  margin-top:1rem;
+}
+
+.report-item{
+  display:flex;
+  gap:1rem;
+  padding:1rem;
+  background:whitesmoke;
+  border-radius:8px;
+  margin-bottom:.5rem;
+  align-items:center;
+}
+
+.report-rank{
+  font-weight:bold;
+  color:steelblue;
+  font-size:1.2rem;
+  min-width:30px;
+}
+
+.report-details{
+  flex:1;
+}
+
+.report-title{
+  font-weight:bold;
+  margin-bottom:.5rem;
+  font-size:.95rem;
+}
+
+.report-stats{
+  font-size:.9rem;
+  color:gray;
 }

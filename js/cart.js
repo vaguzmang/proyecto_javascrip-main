@@ -1,6 +1,7 @@
 import { showToast } from './ui.js';
 
 let cart=JSON.parse(localStorage.getItem('cart'))||{};
+let purchases=JSON.parse(localStorage.getItem('purchases'))||[];
 const items=document.getElementById('cartItems');
 const totalEl=document.getElementById('cartTotal');
 const countEl=document.getElementById('cartCount');
@@ -14,6 +15,18 @@ document.getElementById('checkoutButton').onclick=()=>{
     showToast('El carrito está vacío', 'warning');
     return;
   }
+  
+  // Guardar compras
+  Object.values(cart).forEach(p=>{
+    const existing=purchases.find(purchase=>purchase.id===p.id);
+    if(existing){
+      existing.qty+=p.qty;
+    }else{
+      purchases.push({id:p.id,title:p.title,qty:p.qty,price:p.price});
+    }
+  });
+  localStorage.setItem('purchases',JSON.stringify(purchases));
+  
   cart={};
   save();
   renderCart();
@@ -51,3 +64,7 @@ function renderCart(){
 }
 
 function save(){localStorage.setItem('cart',JSON.stringify(cart))}
+
+export function getPurchases(){
+  return purchases.sort((a,b)=>b.qty-a.qty);
+}

@@ -12,9 +12,14 @@
 
 <header class="header">
   <h1>MAKAVAVI</h1>
-  <button id="cartButton" aria-label="Carrito de compras">
-    🛒 <span id="cartCount">0 / 0</span>
-  </button>
+  <div class="header-buttons">
+    <button id="reportButton" aria-label="Ver informes">
+      📊 Informes
+    </button>
+    <button id="cartButton" aria-label="Carrito de compras">
+      🛒 <span id="cartCount">0 / 0</span>
+    </button>
+  </div>
 </header>
 
 <section class="controls">
@@ -37,6 +42,14 @@
 </main>
 
 <div id="overlay"></div>
+
+<div id="reportModal" class="modal">
+  <div class="modal-content">
+    <button id="closeReport" class="modal-close">✖</button>
+    <h2>Informes de Compras</h2>
+    <div id="reportContent"></div>
+  </div>
+</div>
 
 <aside class="cart">
   <button id="closeCart">✖</button>
