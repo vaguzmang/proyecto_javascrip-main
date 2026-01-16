@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>makavavi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="toastContainer"></div>
+
+<header class="header">
+  <h1>MAKAVAVI</h1>
+  <button id="cartButton" aria-label="Carrito de compras">
+    🛒 <span id="cartCount">0 / 0</span>
+  </button>
+</header>
+
+<section class="controls">
+  <input id="searchInput" placeholder="Buscar producto...">
+  <select id="categoryFilter">
+    <option value="all">Todas las categorías</option>
+  </select>
+  <select id="sortFilter">
+    <option value="default">Ordenar</option>
+    <option value="az">A → Z</option>
+    <option value="za">Z → A</option>
+    <option value="price-asc">Precio ↑</option>
+    <option value="price-desc">Precio ↓</option>
+  </select>
+</section>
+
+<main>
+  <div id="loader" class="loader">Cargando productos...</div>
+  <section id="productsContainer" class="products"></section>
+</main>
+
+<div id="overlay"></div>
+
+<aside class="cart">
+  <button id="closeCart">✖</button>
+  <h2>Carrito de compras</h2>
+  <div id="cartItems"></div>
+  <div id="cartTotal"></div>
+  <button id="checkoutButton">Comprar</button>
+</aside>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
+

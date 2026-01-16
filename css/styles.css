@@ -1,0 +1,101 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background-color:whitesmoke}
+
+.header{
+  background-color:steelblue;
+  color:white;
+  padding:1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+#cartButton{
+  font-size:1.4rem;
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+.controls{
+  display:flex;
+  gap:.5rem;
+  padding:1rem;
+  background-color:white;
+}
+
+.controls input,.controls select{
+  padding:.5rem;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:1rem;
+  padding:1rem;
+}
+
+.product-card{
+  background-color:white;
+  padding:1rem;
+  border-radius:8px;
+  transition:transform .2s ease;
+}
+
+.product-card:hover{transform:scale(1.02)}
+.product-card img{width:100%;height:150px;object-fit:contain}
+
+.product-card button{
+  margin-top:.5rem;
+  background-color:steelblue;
+  color:white;
+  border:none;
+  padding:.5rem;
+  cursor:pointer;
+}
+
+.loader{display:none;text-align:center;padding:1rem;font-weight:bold}
+.loader.active{display:block}
+
+#toastContainer{
+  position:fixed;
+  top:1rem;
+  left:1rem;
+  z-index:2000;
+}
+
+.toast{padding:.75rem;color:white;margin-bottom:.5rem;border-radius:5px}
+.toast-success{background-color:green}
+.toast-error{background-color:crimson}
+.toast-warning{background-color:orange}
+
+.cart{
+  position:fixed;
+  right:-420px;
+  top:0;
+  width:380px;
+  height:100%;
+  background:white;
+  padding:1rem;
+  transition:right .3s ease;
+  z-index:1500;
+}
+
+body.cart-open .cart{right:0}
+
+#overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  display:none;
+}
+
+body.cart-open #overlay{display:block}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:.5rem;
+  margin-bottom:.5rem;
+}
