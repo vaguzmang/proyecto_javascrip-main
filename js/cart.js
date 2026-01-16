@@ -46,17 +46,51 @@ function renderCart(){
   items.innerHTML='';
   let total=0,qty=0;
 
-  Object.values(cart).forEach(p=>{
+  Object.entries(cart).forEach(([productId,p])=>{
     total+=p.price*p.qty;
     qty+=p.qty;
     const d=document.createElement('div');
     d.className='cart-item';
     d.innerHTML=`
-      <span>${p.title}</span>
-      <span>${p.qty}</span>
-      <span>$ ${(p.price*p.qty*4200).toLocaleString('es-CO')} COP</span>
+      <span class="cart-item-title">${p.title}</span>
+      <div class="cart-item-controls">
+        <button class="qty-btn minus" data-id="${productId}">−</button>
+        <input type="number" class="qty-input" data-id="${productId}" value="${p.qty}" min="1">
+        <button class="qty-btn plus" data-id="${productId}">+</button>
+      </div>
+      <span class="cart-item-price">$ ${(p.price*p.qty*4200).toLocaleString('es-CO')} COP</span>
     `;
     items.appendChild(d);
+  });
+
+  // Agregar event listeners para los controles de cantidad
+  document.querySelectorAll('.qty-btn').forEach(btn=>{
+    btn.onclick=e=>{
+      const id=parseInt(e.target.dataset.id);
+      if(e.target.classList.contains('minus')){
+        if(cart[id].qty>1){
+          cart[id].qty--;
+        }else{
+          delete cart[id];
+        }
+      }else if(e.target.classList.contains('plus')){
+        cart[id].qty++;
+      }
+      save();renderCart();
+    };
+  });
+
+  document.querySelectorAll('.qty-input').forEach(input=>{
+    input.onchange=e=>{
+      const id=parseInt(e.target.dataset.id);
+      const newQty=parseInt(e.target.value);
+      if(newQty<1){
+        delete cart[id];
+      }else{
+        cart[id].qty=newQty;
+      }
+      save();renderCart();
+    };
   });
 
   totalEl.textContent=`Total: $ ${ (total*4200).toLocaleString('es-CO') } COP`;
